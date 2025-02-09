@@ -1,9 +1,11 @@
 import json
-from operator import itemgetter
-import os
-from bisect import bisect_left
 import math
-from collections import defaultdict
+import os
+import bisect
+import operator
+import collections
+
+# 3rd party
 import numpy as np
 
 CODE_MAP = str.maketrans("⬛🟨🟩", "012")
@@ -15,7 +17,7 @@ def load_word_weight(filename: str) -> np.ndarray:
 
     # sort by freq, low -> high 
     word_tuple = [(k, v) for k, v in word_freqs.items()]
-    freq_sorted = sorted(word_tuple, key=itemgetter(1))
+    freq_sorted = sorted(word_tuple, key=operator.itemgetter(1))
 
     # generate score from the index, not by the actual frequency
     word_score = []
@@ -57,7 +59,7 @@ def load_matrix(word_list, filename="cache.npy") -> np.ndarray:
 def binary_search(a, x) -> int:
     lo = 0
     hi = len(a)
-    pos = bisect_left(a, x, lo, hi)                  
+    pos = bisect.bisect_left(a, x, lo, hi)                  
     return pos if pos != hi and a[pos] == x else -1
 
 
@@ -92,7 +94,7 @@ def get_entropies(possible_answers:list[int], matrix:np.ndarray, word_weights:np
     entropies = np.zeros(matrix.shape[1], dtype=float)
     for j in range(matrix.shape[1]):
         # count unique patterns that result from each possible word
-        counter = defaultdict(float)
+        counter = collections.defaultdict(float)
         for i in possible_answers:
             # words are weighted by their freq score
             counter[matrix[i, j]] += word_weights[i]
