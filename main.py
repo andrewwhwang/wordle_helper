@@ -105,24 +105,7 @@ def get_entropies(possible_answers:list[int], matrix:np.ndarray, word_weights:np
 
     return entropies
 
-if __name__ == "__main__":
-
-    word_weight = load_word_weight("freq_map.json")
-    word_list = load_words("allowed_words.txt")
-    matrix = load_matrix(word_list)
-
-    # Answer is 'bonus'
-    guesses = [
-        "niter",
-        "coals",
-        "bongo",
-        ]
-    patterns = [
-        "🟨⬛⬛⬛⬛",
-        "⬛🟩⬛⬛🟩",
-        "🟩🟩🟩⬛⬛",
-        ]
-
+def run(guesses:list[str], patterns:list[str], word_weight:np.ndarray, word_list:np.ndarray, matrix:np.ndarray) -> None:
     # loop through inputs to get the current state of the game
     possible_answers = set(range(len(word_list)))
     for word, pattern in zip(guesses, patterns):
@@ -146,3 +129,26 @@ if __name__ == "__main__":
     best_clues = sorted(zip(entropies, word_list), reverse=True)
     for bits, word in best_clues[:5]:
         print("\t", word, f"{bits:.3f} bits")
+
+
+if __name__ == "__main__":
+
+    word_weight = load_word_weight("freq_map.json")
+    word_list = load_words("allowed_words.txt")
+    matrix = load_matrix(word_list)
+
+    # Answer is 'lever'
+    guesses = [
+        "crane",
+        "split",
+        "exact",
+        # "lover",
+        ]
+    patterns = [
+        "⬛🟨⬛⬛🟨",
+        "⬛⬛🟨⬛⬛",
+        "🟨⬛⬛⬛⬛",
+        # "🟩⬛🟩🟩🟩",
+        ]
+
+    run(guesses, patterns, word_weight, word_list, matrix)
