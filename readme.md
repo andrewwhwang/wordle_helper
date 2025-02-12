@@ -1,8 +1,9 @@
 # Wordle Helper
 A quick script that'll help you win at wordle
+
 Given an input of guesses it'll output:
 * a list of possible answer ordered by confidence
-* a list of the best words to guess that will minimize the number of possible answers
+* a list of words ordered by how much it'll minimize the number of possible words
 ## Usage Example
 Given the guesses:
 ```python
