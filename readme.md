@@ -19,7 +19,7 @@ patterns = [
 
 ```
 Output:
-```python
+```
 Answer Confidence (Total Entropy: 1.001 bits):
          bonds 50.01%
          bonus 49.98%
