@@ -3,7 +3,7 @@ A quick script that'll help you win at wordle
 
 Given an input of guesses it'll output:
 * a list of possible answer ordered by confidence
-* a list of words ordered by how much it'll minimize the number of possible words
+* a list of words ordered by how much it'll narrow down the possible answers
 ## Usage Example
 Given the guesses:
 ```python
